@@ -7,13 +7,13 @@
 FullscreenQuad::FullscreenQuad()
 {
 	const float quad[6][2] = {
-		{ 0.0f, 0.0f },
-		{ 1.0f, 0.0f },
-		{ 1.0f, 1.0f },
+		{ -1.0f, -1.0f },
+		{ -1.0f, +1.0f },
+		{ +1.0f, +1.0f },
 
-		{ 1.0f, 1.0f },
-		{ 0.0f, 1.0f },
-		{ 0.0f, 0.0f }
+		{ -1.0f, -1.0f },
+		{ +1.0f, -1.0f },
+		{ +1.0f, +1.0f },
 	};
 
 	glGenVertexArrays(1, &vao);
@@ -35,5 +35,5 @@ FullscreenQuad::~FullscreenQuad()
 
 void FullscreenQuad::Draw()
 {
-	glDrawArrays(GL_TRIANGLES, 0, 12);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }

@@ -162,13 +162,21 @@
     <ClCompile Include="FullscreenQuad.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Recorder.cpp" />
+    <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FullscreenQuad.hpp" />
     <ClInclude Include="Recorder.hpp" />
+    <ClInclude Include="Shader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="tutorial2.frag">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="tutorial2.vert">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
