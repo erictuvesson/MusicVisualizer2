@@ -1,0 +1,2 @@
+BASS 2.4
+Copyright (c) 1999-2018 Un4seen Developments Ltd. All rights reserved.
