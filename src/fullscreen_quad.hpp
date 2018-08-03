@@ -1,6 +1,6 @@
 #pragma once
 
-typedef unsigned int GLuint;
+#include "config.hpp"
 
 /**
  * Renders a Fullscreen Quad rendering 
@@ -17,4 +17,3 @@ public:
 private:
 	GLuint vao, vbo[1];
 };
-

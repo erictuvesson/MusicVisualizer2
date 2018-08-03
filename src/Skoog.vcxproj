@@ -169,16 +169,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="fullscreen_quad.hpp" />
     <ClInclude Include="audio_recorder.hpp" />
-    <ClInclude Include="shader.hpp" />
+    <ClInclude Include="image.hpp" />
+    <ClInclude Include="image_factory.hpp" />
+    <ClInclude Include="shader_factory.hpp" />
+    <ClInclude Include="shader_resource.hpp" />
+    <ClInclude Include="shader_manager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="fullscreen_quad.cpp" />
+    <ClCompile Include="image.cpp" />
+    <ClCompile Include="image_factory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="audio_recorder.cpp" />
-    <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shader_factory.cpp" />
+    <ClCompile Include="shader_resource.cpp" />
+    <ClCompile Include="shader_manager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,24 +1,22 @@
-#include "shader.hpp"
+#include "shader_resource.hpp"
 
-#include <GL/glew.h>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include "config.hpp"
 
 #include <fstream>
 #include <streambuf>
 #include <iostream>
 
-Shader::Shader()
+ShaderResource::ShaderResource()
 {
 
 }
 
-Shader::~Shader()
+ShaderResource::~ShaderResource()
 {
 
 }
 
-bool Shader::Compile(const std::string& vertFile, const std::string& fragFile)
+bool ShaderResource::Compile(const std::string& vertFile, const std::string& fragFile)
 {
 	char* infoLog;
 
@@ -88,7 +86,7 @@ bool Shader::Compile(const std::string& vertFile, const std::string& fragFile)
 	return true;
 }
 
-void Shader::Apply()
+void ShaderResource::Apply()
 {
 	glUseProgram(shaderprogram);
 }
