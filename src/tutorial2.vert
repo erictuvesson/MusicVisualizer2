@@ -14,5 +14,5 @@ void main(void) {
     // gl_Position = vec4(in_Position, 0.0, 1.0);
     // We're simply passing the color through unmodified
 
-    ex_Color = vec3(1,0,0);
+    ex_Color = vec3(1, 0, 0);
 }
