@@ -1,12 +1,12 @@
-#include "Shader.hpp"
+#include "shader.hpp"
 
 #include <GL/glew.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
 
-#include <string>
 #include <fstream>
 #include <streambuf>
+#include <iostream>
 
 Shader::Shader()
 {
@@ -15,16 +15,22 @@ Shader::Shader()
 
 Shader::~Shader()
 {
-	glUseProgram(0);
+
 }
 
-bool Shader::Compile()
+bool Shader::Compile(const std::string& vertFile, const std::string& fragFile)
 {
-	std::ifstream vert("tutorial2.vert");
+	char* infoLog;
+
+	int IsCompiled_VS, IsCompiled_FS;
+	int IsLinked;
+	int maxLength;
+
+	std::ifstream vert(vertFile);
 	std::string vertexsource((std::istreambuf_iterator<char>(vert)), std::istreambuf_iterator<char>());
 	const char* p_vertexsource = vertexsource.c_str();
 
-	std::ifstream frag("tutorial2.frag");
+	std::ifstream frag(fragFile);
 	std::string fragmentsource((std::istreambuf_iterator<char>(frag)), std::istreambuf_iterator<char>());
 	const char* p_fragmentsource = fragmentsource.c_str();
 
@@ -38,9 +44,10 @@ bool Shader::Compile()
 	if (IsCompiled_VS == false)
 	{
 		glGetShaderiv(vertexshader, GL_INFO_LOG_LENGTH, &maxLength);
-		vertexInfoLog = (char *)malloc(maxLength);
-		glGetShaderInfoLog(vertexshader, maxLength, &maxLength, vertexInfoLog);
-		free(vertexInfoLog);
+		infoLog = (char*)malloc(maxLength);
+		glGetShaderInfoLog(vertexshader, maxLength, &maxLength, infoLog);
+		std::cout << infoLog;
+		delete infoLog;
 		return false;
 	}
 
@@ -51,9 +58,10 @@ bool Shader::Compile()
 	if (IsCompiled_FS == false)
 	{
 		glGetShaderiv(fragmentshader, GL_INFO_LOG_LENGTH, &maxLength);
-		fragmentInfoLog = (char *)malloc(maxLength);
-		glGetShaderInfoLog(fragmentshader, maxLength, &maxLength, fragmentInfoLog);
-		free(fragmentInfoLog);
+		infoLog = (char*)malloc(maxLength);
+		glGetShaderInfoLog(fragmentshader, maxLength, &maxLength, infoLog);
+		std::cout << infoLog;
+		delete infoLog;
 		return false;
 	}
 
@@ -63,7 +71,6 @@ bool Shader::Compile()
 	glAttachShader(shaderprogram, fragmentshader);
 
 	glBindAttribLocation(shaderprogram, 0, "in_Position");
-	//glBindAttribLocation(shaderprogram, 1, "in_Color");
 
 	glLinkProgram(shaderprogram);
 
@@ -71,9 +78,10 @@ bool Shader::Compile()
 	if (!IsLinked)
 	{
 		glGetProgramiv(shaderprogram, GL_INFO_LOG_LENGTH, &maxLength);
-		shaderProgramInfoLog = (char *)malloc(maxLength);
-		glGetProgramInfoLog(shaderprogram, maxLength, &maxLength, shaderProgramInfoLog);
-		free(shaderProgramInfoLog);
+		infoLog = (char *)malloc(maxLength);
+		glGetProgramInfoLog(shaderprogram, maxLength, &maxLength, infoLog);
+		std::cout << infoLog;
+		delete infoLog;
 		return false;
 	}
 

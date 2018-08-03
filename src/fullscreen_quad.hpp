@@ -7,13 +7,14 @@ typedef unsigned int GLuint;
  */
 class FullscreenQuad
 {
-private:
-	GLuint vao, vbo[1];
-
 public:
 	FullscreenQuad();
 	virtual ~FullscreenQuad();
 
+	void Initialize();
 	void Draw();
+
+private:
+	GLuint vao, vbo[1];
 };
 

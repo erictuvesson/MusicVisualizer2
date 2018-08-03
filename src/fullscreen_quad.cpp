@@ -1,4 +1,4 @@
-#include "FullscreenQuad.hpp"
+#include "fullscreen_quad.hpp"
 
 #include <GL/glew.h>
 #include <SDL.h>
@@ -6,11 +6,22 @@
 
 FullscreenQuad::FullscreenQuad()
 {
+
+}
+
+FullscreenQuad::~FullscreenQuad()
+{
+	//glDisableVertexAttribArray(0);
+	//glDeleteBuffers(1, vbo);
+	//glDeleteVertexArrays(1, &vao);
+}
+
+void FullscreenQuad::Initialize()
+{
 	const float quad[6][2] = {
 		{ -1.0f, -1.0f },
 		{ -1.0f, +1.0f },
 		{ +1.0f, +1.0f },
-
 		{ -1.0f, -1.0f },
 		{ +1.0f, -1.0f },
 		{ +1.0f, +1.0f },
@@ -24,13 +35,6 @@ FullscreenQuad::FullscreenQuad()
 	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), quad, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
-}
-
-FullscreenQuad::~FullscreenQuad()
-{
-	glDisableVertexAttribArray(0);
-	glDeleteBuffers(1, vbo);
-	glDeleteVertexArrays(1, &vao);
 }
 
 void FullscreenQuad::Draw()
