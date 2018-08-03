@@ -1,10 +1,9 @@
 #include "shader_resource.hpp"
 
-#include "config.hpp"
-
-#include <fstream>
-#include <streambuf>
 #include <iostream>
+
+#include "config.hpp"
+#include "file_manager.hpp"
 
 ShaderResource::ShaderResource()
 {
@@ -24,12 +23,10 @@ bool ShaderResource::Compile(const std::string& vertFile, const std::string& fra
 	int IsLinked;
 	int maxLength;
 
-	std::ifstream vert(vertFile);
-	std::string vertexsource((std::istreambuf_iterator<char>(vert)), std::istreambuf_iterator<char>());
-	const char* p_vertexsource = vertexsource.c_str();
+	const std::string vertexsource = FileManager::ReadFile(vertFile).c_str();
+	const std::string fragmentsource = FileManager::ReadFile(fragFile).c_str();
 
-	std::ifstream frag(fragFile);
-	std::string fragmentsource((std::istreambuf_iterator<char>(frag)), std::istreambuf_iterator<char>());
+	const char* p_vertexsource = vertexsource.c_str();
 	const char* p_fragmentsource = fragmentsource.c_str();
 
 	vertexshader = glCreateShader(GL_VERTEX_SHADER);

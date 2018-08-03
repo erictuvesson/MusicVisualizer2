@@ -7,9 +7,9 @@ FullscreenQuad::FullscreenQuad()
 
 FullscreenQuad::~FullscreenQuad()
 {
-	//glDisableVertexAttribArray(0);
-	//glDeleteBuffers(1, vbo);
-	//glDeleteVertexArrays(1, &vao);
+	// glDisableVertexAttribArray(0);
+	// glDeleteBuffers(1, vbo);
+	// glDeleteVertexArrays(1, &vao);
 }
 
 void FullscreenQuad::Initialize()
