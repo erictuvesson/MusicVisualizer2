@@ -160,10 +160,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="tutorial2.frag">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="tutorial2.vert">
+    <None Include="tutorial2.frag" />
+    <None Include="tutorial3.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>

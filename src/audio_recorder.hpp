@@ -49,6 +49,8 @@ public:
 	 */
 	bool Listen(const AudioDevice& device);
 
+	void Destroy();
+
 	/**
 	 * Check if we can use the audio system.
 	 */

@@ -15,7 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="tutorial2.vert">
+    <None Include="tutorial3.frag">
       <Filter>Shaders</Filter>
     </None>
     <None Include="tutorial2.frag">

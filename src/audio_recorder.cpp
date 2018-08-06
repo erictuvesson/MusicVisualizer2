@@ -15,8 +15,7 @@ AudioRecorder::AudioRecorder()
 
 AudioRecorder::~AudioRecorder()
 {
-	destroy_thread();
-	BASS_RecordFree();
+	Destroy();
 }
 
 std::vector<AudioDevice> AudioRecorder::GetDevices() const
@@ -52,6 +51,12 @@ bool AudioRecorder::Listen(const AudioDevice& device)
 	this->device = device;
 	this->thread = std::thread(&AudioRecorder::process_audio, this);
 	return true;
+}
+
+void AudioRecorder::Destroy()
+{
+	destroy_thread();
+	BASS_RecordFree();
 }
 
 void AudioRecorder::destroy_thread()

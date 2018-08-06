@@ -24,7 +24,20 @@ int App::Run()
 		return error;
 	}
 
+
+	{
+		int wx, wy;
+		SDL_GetWindowSize(window, &wx, &wy);
+		shaderState.iResolution[0] = wx;
+		shaderState.iResolution[1] = wy;
+		shaderState.iResolution[2] = 0;
+
+	}
+
+
+
 	bool isRunning = true;
+	unsigned int lastTime = 0, currentTime = 0;
 	SDL_Event event;
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
@@ -35,11 +48,17 @@ int App::Run()
 			}
 		}
 
-		draw();
+		lastTime = currentTime;
+		currentTime = SDL_GetPerformanceCounter();
+
+		const float deltaTime = (currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency();
+
+		draw(deltaTime / 1000);
 	}
 
 	SDL_GL_DeleteContext(glContext);
 	SDL_Quit();
+	audioRecorder.Destroy();
 
 	return EXIT_SUCCESS;
 }
@@ -89,23 +108,29 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	// Initialize the shader
-	if (!shader.Compile("tutorial2.vert", "tutorial2.frag")) {
+	shader = ShaderFactory::CompileShader({ "tutorial3.frag" });
+	if (shader == nullptr) {
+		std::cin.get();
 		return EXIT_FAILURE;
 	}
+
 
 	return EXIT_SUCCESS;
 }
 
-void App::draw()
+void App::draw(float elapsedtime)
 {
+	shaderState.iTime += elapsedtime;
+	shaderState.iTimeDelta = elapsedtime;
+	shaderState.iFrame++;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	if (auto sample = audioRecorder.GetSample()) {
-		printf("%f, %f\n", sample->sum, sample->average);
+		printf("%f: %f, %f\n", elapsedtime, sample->sum, sample->average);
 	}
 
-	shader.Apply();
+	shader->Apply(shaderState);
 	fullscreenQuad.Draw();
 
 	SDL_GL_SwapWindow(window);

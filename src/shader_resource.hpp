@@ -2,21 +2,40 @@
 
 #include "config.hpp"
 
+struct ShaderState
+{
+	float iResolution[3];
+	float iTime;
+	float iTimeDelta;
+	float iFrame;
+	float iChannelTime[4];
+	float iMouse[4];
+	float iDate[4];
+	float iSampleRate;
+	float iChannelResolution[3][4];
+};
+
 /**
  * ShaderResource, stores a shader and it's state.
  */
 class ShaderResource
 {
 public:
-	ShaderResource();
+	ShaderResource(GLuint programId);
 	virtual ~ShaderResource();
 
-	bool Compile(const std::string& vertFile, const std::string& fragFile);
-
-	void Apply();
+	void Apply(const ShaderState& state);
 
 private:
-	GLuint vertexshader, fragmentshader;
 	GLuint shaderprogram;
-};
 
+	GLuint iResolutionLocation;
+	GLuint iTimeLocation;
+	GLuint iTimeDeltaLocation;
+	GLuint iFrameLocation;
+	GLuint iChannelTimeLocation;
+	GLuint iMouseLocation;
+	GLuint iDateLocation;
+	GLuint iSampleRateLocation;
+	GLuint iChannelResolutionLocation;
+};

@@ -5,6 +5,7 @@
 #include "config.hpp"
 #include "audio_recorder.hpp"
 #include "fullscreen_quad.hpp"
+#include "shader_factory.hpp"
 #include "shader_resource.hpp"
 
 /**
@@ -23,12 +24,13 @@ public:
 
 private:
 	int initialize();
-	void draw();
+	void draw(float elapsedtime);
 
 private:
 	SDL_Window* window;
 	SDL_GLContext glContext;
 	AudioRecorder audioRecorder;
 	FullscreenQuad fullscreenQuad;
-	ShaderResource shader;
+	ShaderState shaderState;
+	std::unique_ptr<ShaderResource> shader;
 };

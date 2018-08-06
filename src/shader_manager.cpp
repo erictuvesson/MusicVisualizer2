@@ -9,3 +9,8 @@ ShaderManager::~ShaderManager()
 {
 
 }
+
+void ShaderManager::Update(float elapsedTime)
+{
+
+}
