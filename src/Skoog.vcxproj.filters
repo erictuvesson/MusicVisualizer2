@@ -21,6 +21,18 @@
     <None Include="tutorial2.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="tutorial4.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="tutorial5.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="tutorial6.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="tutorial7.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp">

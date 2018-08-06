@@ -164,6 +164,10 @@
     <None Include="tutorial3.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="tutorial4.frag" />
+    <None Include="tutorial5.frag" />
+    <None Include="tutorial6.frag" />
+    <None Include="tutorial7.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />

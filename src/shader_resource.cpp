@@ -17,6 +17,8 @@ ShaderResource::ShaderResource(GLuint programId)
 	iDateLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iDate");
 	iSampleRateLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iSampleRate");
 	iChannelResolutionLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iChannelResolution");
+	iAudioSumLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioSum");
+	iAudioAverageLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioAverage");
 }
 
 ShaderResource::~ShaderResource()
@@ -37,5 +39,7 @@ void ShaderResource::Apply(const ShaderState& state)
 	glUniform4fv(iDateLocation, 1, (const GLfloat*)&state.iDate);
 	glUniform1f(iSampleRateLocation, state.iSampleRate);
 	glUniform3fv(iChannelResolutionLocation, 4, (const GLfloat*)&state.iChannelResolution);
+	glUniform1f(iAudioSumLocation, state.iAudioSum);
+	glUniform1f(iAudioAverageLocation, state.iAudioAverage);
 }
 

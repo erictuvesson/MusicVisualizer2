@@ -18,6 +18,8 @@ const char* GetFragmentShaderHeader() {
 		"uniform vec4 iDate;\n"
 		"uniform float iSampleRate;\n"
 		"uniform vec3 iChannelResolution[4];\n"
+		"uniform float iAudioSum;\n"
+		"uniform float iAudioAverage;\n"
 		"in vec4 gl_FragCoord;\n"
 		"out vec4 gl_FragColor;\n";
 }

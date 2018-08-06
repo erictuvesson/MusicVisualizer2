@@ -79,7 +79,7 @@ int App::initialize()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
 	// Create the window using SDL
-	window = SDL_CreateWindow("Skoog",
+	window = SDL_CreateWindow("Music Visualizer",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
@@ -108,7 +108,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "tutorial3.frag" });
+	shader = ShaderFactory::CompileShader({ "tutorial5.frag" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
@@ -124,11 +124,17 @@ void App::draw(float elapsedtime)
 	shaderState.iTimeDelta = elapsedtime;
 	shaderState.iFrame++;
 
+	if (auto sample = audioRecorder.GetSample()) {
+		shaderState.iAudioSum = sample->sum;
+		shaderState.iAudioAverage = sample->average;
+	}
+	else {
+		shaderState.iAudioSum = 0;
+		shaderState.iAudioAverage = 0;
+	}
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (auto sample = audioRecorder.GetSample()) {
-		printf("%f: %f, %f\n", elapsedtime, sample->sum, sample->average);
-	}
 
 	shader->Apply(shaderState);
 	fullscreenQuad.Draw();

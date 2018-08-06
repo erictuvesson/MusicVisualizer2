@@ -8,7 +8,7 @@ static BOOL bassRecordProc(HRECORD handle, const void *buffer, DWORD length, voi
 
 AudioRecorder::AudioRecorder()
 	: device({ -1 })
-	, running(std::make_shared<bool>(true))
+	, running(std::make_unique<bool>(true))
 {
 
 }
@@ -32,9 +32,9 @@ std::vector<AudioDevice> AudioRecorder::GetDevices() const
 	return devices;
 }
 
-const std::shared_ptr<AudioSample> AudioRecorder::GetSample() const
+const AudioSample* AudioRecorder::GetSample() const
 { 
-	return sample; 
+	return sample.get();
 }
 
 bool AudioRecorder::Listen(const AudioDevice& device)
@@ -83,7 +83,9 @@ void AudioRecorder::process_audio()
 
 		sample.average = sample.sum != 0 ? sample.sum / 256 : 0;
 
-		this->sample = std::make_shared<AudioSample>(sample);
+		m.lock();
+		this->sample = std::make_unique<AudioSample>(sample);
+		m.unlock();
 	}
 }
 

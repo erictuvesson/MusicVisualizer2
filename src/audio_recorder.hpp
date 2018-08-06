@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <thread>
+#include <mutex>
 #include <bass.h>
 
 /**
@@ -42,7 +43,7 @@ public:
 	/**
 	 * Get the current sample.
 	 */
-	const std::shared_ptr<AudioSample> GetSample() const;
+	const AudioSample* GetSample() const;
 
 	/**
 	 * Set the current device we are going to listen to.
@@ -63,6 +64,7 @@ private:
 private:
 	AudioDevice device;
 	std::thread thread;
-	std::shared_ptr<bool> running;
-	std::shared_ptr<AudioSample> sample;
+	std::unique_ptr<bool> running;
+	std::unique_ptr<AudioSample> sample;
+	std::mutex m;
 };
