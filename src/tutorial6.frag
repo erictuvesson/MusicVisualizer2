@@ -1,7 +1,11 @@
+// require "shape_2d.func"
+// require "animation.func"
+// define "ANIM_FUNC", "AnimBounce", ANIMATIONS
+
 #define polar(a) vec2(cos(a),sin(a))
 #define rotate(a) mat2(cos(a),sin(a),-sin(a),cos(a));
 
-#define ANIM_FUNC Quart
+#define ANIM_FUNC Bounce
 
 const float pi = atan(1.0)*4.0;
 

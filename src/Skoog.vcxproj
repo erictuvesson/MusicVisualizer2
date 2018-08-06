@@ -159,7 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="animation.func" />
     <None Include="packages.config" />
+    <None Include="shape_2d.func" />
     <None Include="tutorial2.frag" />
     <None Include="tutorial3.frag">
       <DeploymentContent>true</DeploymentContent>

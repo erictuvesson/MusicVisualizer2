@@ -12,6 +12,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{9585f657-e644-447b-bf8f-a1509c1fb912}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Functions">
+      <UniqueIdentifier>{639b23b9-f3a2-4c49-8b0c-99fab63f0aec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -32,6 +35,12 @@
     </None>
     <None Include="tutorial7.frag">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="animation.func">
+      <Filter>Shaders\Functions</Filter>
+    </None>
+    <None Include="shape_2d.func">
+      <Filter>Shaders\Functions</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

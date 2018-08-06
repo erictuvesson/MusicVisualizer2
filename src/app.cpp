@@ -108,12 +108,11 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "tutorial5.frag" });
+	shader = ShaderFactory::CompileShader({ "tutorial6.frag" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
 	}
-
 
 	return EXIT_SUCCESS;
 }
