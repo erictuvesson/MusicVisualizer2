@@ -159,17 +159,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="animation.glsl" />
     <None Include="packages.config" />
-    <None Include="shape_2d.glsl" />
-    <None Include="tutorial2.glsl" />
-    <None Include="tutorial3.frag">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="tutorial4.glsl" />
-    <None Include="tutorial5.frag" />
-    <None Include="tutorial6.glsl" />
-    <None Include="tutorial7.frag" />
+    <None Include="shaders\func\animation.glsl" />
+    <None Include="shaders\func\shape_2d.glsl" />
+    <None Include="shaders\tutorial2.glsl" />
+    <None Include="shaders\tutorial3.frag" />
+    <None Include="shaders\tutorial4.glsl" />
+    <None Include="shaders\tutorial5.frag" />
+    <None Include="shaders\tutorial6.glsl" />
+    <None Include="shaders\tutorial7.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />

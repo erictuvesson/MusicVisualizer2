@@ -9,41 +9,41 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{9585f657-e644-447b-bf8f-a1509c1fb912}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Functions">
-      <UniqueIdentifier>{639b23b9-f3a2-4c49-8b0c-99fab63f0aec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{6e8afb37-2c3b-4d76-87e1-56e1bd5dd8f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{51f53958-d5e5-4b3a-896e-7a18f888acf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\func">
+      <UniqueIdentifier>{1a92c80b-1972-4785-b0d7-57d657d6b225}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="tutorial3.frag">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\tutorial2.glsl">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="tutorial5.frag">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\tutorial3.frag">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="tutorial7.frag">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\tutorial4.glsl">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="animation.glsl">
-      <Filter>Shaders\Functions</Filter>
+    <None Include="shaders\tutorial5.frag">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="shape_2d.glsl">
-      <Filter>Shaders\Functions</Filter>
+    <None Include="shaders\tutorial6.glsl">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="tutorial6.glsl">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\tutorial7.frag">
+      <Filter>shaders</Filter>
     </None>
-    <None Include="tutorial2.glsl">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\func\animation.glsl">
+      <Filter>shaders\func</Filter>
     </None>
-    <None Include="tutorial4.glsl">
-      <Filter>Shaders</Filter>
+    <None Include="shaders\func\shape_2d.glsl">
+      <Filter>shaders\func</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
