@@ -1,4 +1,4 @@
-// variable ANIMATIONS, ["AnimOverShoot", "AnimSpring", "AnimBounce", "AnimQuart", "AnimLinear", "AnimQuartSine", "AnimHalfSine"]
+//! #variable ANIMATIONS, ["AnimOverShoot", "AnimSpring", "AnimBounce", "AnimQuart", "AnimLinear", "AnimQuartSine", "AnimHalfSine"]
 
 //--- Animation Functions ---
 

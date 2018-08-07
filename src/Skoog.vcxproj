@@ -159,16 +159,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="animation.func" />
+    <None Include="animation.glsl" />
     <None Include="packages.config" />
-    <None Include="shape_2d.func" />
-    <None Include="tutorial2.frag" />
+    <None Include="shape_2d.glsl" />
+    <None Include="tutorial2.glsl" />
     <None Include="tutorial3.frag">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="tutorial4.frag" />
+    <None Include="tutorial4.glsl" />
     <None Include="tutorial5.frag" />
-    <None Include="tutorial6.frag" />
+    <None Include="tutorial6.glsl" />
     <None Include="tutorial7.frag" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +179,14 @@
     <ClInclude Include="audio_recorder.hpp" />
     <ClInclude Include="image.hpp" />
     <ClInclude Include="image_factory.hpp" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\stb_rect_pack.h" />
+    <ClInclude Include="imgui\stb_textedit.h" />
+    <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="shader_factory.hpp" />
     <ClInclude Include="shader_resource.hpp" />
     <ClInclude Include="shader_manager.hpp" />
@@ -189,6 +197,10 @@
     <ClCompile Include="fullscreen_quad.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="image_factory.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_impl_sdl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="audio_recorder.cpp" />
     <ClCompile Include="shader_factory.cpp" />

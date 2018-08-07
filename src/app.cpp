@@ -41,12 +41,17 @@ int App::Run()
 	SDL_Event event;
 	while (isRunning) {
 		while (SDL_PollEvent(&event)) {
+			ImGui_ImplSDL2_ProcessEvent(&event);
 			switch (event.type) {
 			case SDL_QUIT:
 				isRunning = false;
 				break;
 			}
 		}
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplSDL2_NewFrame(window);
+		ImGui::NewFrame();
 
 		lastTime = currentTime;
 		currentTime = SDL_GetPerformanceCounter();
@@ -55,6 +60,10 @@ int App::Run()
 
 		draw(deltaTime / 1000);
 	}
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
 
 	SDL_GL_DeleteContext(glContext);
 	SDL_Quit();
@@ -102,13 +111,27 @@ int App::initialize()
 		return EXIT_FAILURE;
 	}
 
+	// Setup Dear ImGui binding
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+
+	ImGui_ImplSDL2_InitForOpenGL(window, glContext);
+	ImGui_ImplOpenGL3_Init("#version 330");
+
+	// Setup style
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsClassic();
+
+
 	// Initialize the audio device
 	auto devices = audioRecorder.GetDevices();
 	audioRecorder.Listen(devices[devices.size() - 1]);
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "tutorial6.frag" });
+	shader = ShaderFactory::CompileShader({ "tutorial4.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
@@ -137,6 +160,29 @@ void App::draw(float elapsedtime)
 
 	shader->Apply(shaderState);
 	fullscreenQuad.Draw();
+
+
+	{
+		static float f = 0.0f;
+		static int counter = 0;
+
+		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+
+		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f    
+
+		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			counter++;
+		ImGui::SameLine();
+		ImGui::Text("counter = %d", counter);
+
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::End();
+	}
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 	SDL_GL_SwapWindow(window);
 }

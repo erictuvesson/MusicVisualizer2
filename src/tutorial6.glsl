@@ -1,6 +1,6 @@
-// require "shape_2d.func"
-// require "animation.func"
-// define "ANIM_FUNC", "AnimBounce", ANIMATIONS
+//! #include "shape_2d.glsl"
+//! #include "animation.glsl"
+//! #define "ANIM_FUNC", "AnimBounce", ANIMATIONS
 
 #define polar(a) vec2(cos(a),sin(a))
 #define rotate(a) mat2(cos(a),sin(a),-sin(a),cos(a));
