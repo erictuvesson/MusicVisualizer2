@@ -1,9 +1,14 @@
 
-
-
+//! #define "ANIM_FUNC", "AnimBounce", ANIMATIONS
 
 void main(void) {
-	gl_FragColor = vec4(iAudioSum, iAudioSum, iAudioSum, 1);
+	vec3 audioSumColor = vec3(iAudioSum);
+
+	float y = gl_FragCoord.y / iResolution.y;
+	
+	audioSumColor *= y / 2.;
+
+	gl_FragColor = vec4(audioSumColor, 1);
 }
 
 

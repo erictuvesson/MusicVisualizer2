@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "config.hpp"
 #include "audio_recorder.hpp"
@@ -33,4 +34,6 @@ private:
 	FullscreenQuad fullscreenQuad;
 	ShaderState shaderState;
 	std::unique_ptr<ShaderResource> shader;
+
+	std::vector<float> audioSumQueue;
 };

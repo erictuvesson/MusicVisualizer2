@@ -131,7 +131,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "tutorial4.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/tutorial4.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
@@ -155,12 +155,16 @@ void App::draw(float elapsedtime)
 		shaderState.iAudioAverage = 0;
 	}
 
+	audioSumQueue.insert(audioSumQueue.begin(), shaderState.iAudioSum);
+	while (audioSumQueue.size() > 300) {
+		audioSumQueue.pop_back();
+	}
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
 	shader->Apply(shaderState);
 	fullscreenQuad.Draw();
-
 
 	{
 		const float DISTANCE = 10.0f;
@@ -171,13 +175,12 @@ void App::draw(float elapsedtime)
 		if (corner != -1)
 			ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
 
-		ImGui::SetNextWindowBgAlpha(0.0f);
+		ImGui::SetNextWindowBgAlpha(1.0f);
 		if (ImGui::Begin("", NULL, (corner != -1 ? ImGuiWindowFlags_NoMove : 0) | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
 		{
 			ImGui::Text("%.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 
-			static float arr[] = { 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
-			ImGui::PlotLines("Frame Times", arr, IM_ARRAYSIZE(arr));
+			ImGui::PlotLines("", &audioSumQueue[0], audioSumQueue.size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
 		}
 		ImGui::End();
 	}
