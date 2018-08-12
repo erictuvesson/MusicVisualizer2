@@ -161,6 +161,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="shaders\func\animation.glsl" />
+    <None Include="shaders\func\raymarching.glsl" />
     <None Include="shaders\func\shape_2d.glsl" />
     <None Include="shaders\func\shape_3d.glsl" />
     <None Include="shaders\tutorial2.glsl" />
@@ -188,6 +189,7 @@
     <ClInclude Include="imgui\stb_textedit.h" />
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="shader_factory.hpp" />
+    <ClInclude Include="shader_parser.hpp" />
     <ClInclude Include="shader_resource.hpp" />
     <ClInclude Include="shader_manager.hpp" />
   </ItemGroup>
@@ -204,6 +206,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="audio_recorder.cpp" />
     <ClCompile Include="shader_factory.cpp" />
+    <ClCompile Include="shader_parser.cpp" />
     <ClCompile Include="shader_resource.cpp" />
     <ClCompile Include="shader_manager.cpp" />
   </ItemGroup>

@@ -1,28 +1,11 @@
 #include "shader_factory.hpp"
 
 #include <iostream>
+#include <regex>
 
 #include "config.hpp"
 #include "file_manager.hpp"
-
-const char* GetFragmentShaderHeader() {
-	return 
-		"#version 330\n"
-		"precision highp float;\n"
-		"uniform vec3 iResolution;\n"
-		"uniform float iTime;\n"
-		"uniform float iTimeDelta;\n"
-		"uniform float iFrame;\n"
-		"uniform float iChannelTime[4];\n"
-		"uniform vec4 iMouse;\n"
-		"uniform vec4 iDate;\n"
-		"uniform float iSampleRate;\n"
-		"uniform vec3 iChannelResolution[4];\n"
-		"uniform float iAudioSum;\n"
-		"uniform float iAudioAverage;\n"
-		"in vec4 gl_FragCoord;\n"
-		"out vec4 gl_FragColor;\n";
-}
+#include "shader_parser.hpp"
 
 const char* GetVertexShader() {
 	return
@@ -64,15 +47,11 @@ GLuint CompileRawShader(const char* source, const int type)
 	return shader;
 }
 
-
 std::unique_ptr<ShaderResource> ShaderFactory::CompileShader(ShaderSetup shaderSetup)
 {
-	std::string fragment = FileManager::ReadFile(shaderSetup.FragmentShaderFilepath).c_str();
-	fragment.insert(0, GetFragmentShaderHeader());
-
-	// TODO: Add include functions shader
-
-	const char* p_fragment = fragment.c_str();
+	ShaderParser parser;
+	auto shaderResult = parser.Parse(shaderSetup.FragmentShaderFilepath);
+	const char* p_fragment = shaderResult.Result.c_str();
 
 	GLuint vertexShader = CompileRawShader(GetVertexShader(), GL_VERTEX_SHADER);
 	if (vertexShader == 0) {

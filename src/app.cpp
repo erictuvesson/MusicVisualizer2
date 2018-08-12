@@ -131,7 +131,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/tutorial4.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/tutorial6.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
