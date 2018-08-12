@@ -1,4 +1,23 @@
 
+//--- 3D Shapes Helpers ---
+
+float length2(vec2 p) {
+  return sqrt(p.x * p.x + p.y * p.y);
+}
+
+float length6(vec2 p) {
+  p = p * p * p;
+  p = p * p;
+  return pow(p.x + p.y, 1.0 / 6.0);
+}
+
+float length8(vec2 p) {
+  p = p * p;
+  p = p * p;
+  p = p * p;
+  return pow(p.x + p.y, 1.0 / 8.0);
+}
+
 //--- 3D Shapes ---
 
 float sdPlane(vec3 p) {
@@ -89,8 +108,8 @@ float sdConeSection( in vec3 p, in float h, in float r1, in float r2) {
   return length(max(vec2(d1, d2), 0.0)) + min(max(d1, d2), 0.);
 }
 
-float sdPryamid4(vec3 p, vec3 h) // h = { cos a, sin a, height }
-{
+// h = { cos a, sin a, height }
+float sdPryamid4(vec3 p, vec3 h) {
   // Tetrahedron = Octahedron - Cube
   float box = sdBox(p - vec3(0, -2.0 * h.z, 0), vec3(2.0 * h.z));
 
@@ -101,23 +120,6 @@ float sdPryamid4(vec3 p, vec3 h) // h = { cos a, sin a, height }
   d = max(d, abs(dot(p, vec3(0, h.y, -h.x))));
   float octa = d - h.z;
   return max(-box, octa); // Subtraction
-}
-
-float length2(vec2 p) {
-  return sqrt(p.x * p.x + p.y * p.y);
-}
-
-float length6(vec2 p) {
-  p = p * p * p;
-  p = p * p;
-  return pow(p.x + p.y, 1.0 / 6.0);
-}
-
-float length8(vec2 p) {
-  p = p * p;
-  p = p * p;
-  p = p * p;
-  return pow(p.x + p.y, 1.0 / 8.0);
 }
 
 float sdTorus82(vec3 p, vec2 t) {
