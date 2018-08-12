@@ -26,14 +26,25 @@ public:
 private:
 	int initialize();
 	void draw(float elapsedtime);
+	void drawDebug();
+
+	void setAudioDevice();
+	void updateAudioDevices();
 
 private:
+	// Graphics
 	SDL_Window* window;
 	SDL_GLContext glContext;
-	AudioRecorder audioRecorder;
 	FullscreenQuad fullscreenQuad;
 	ShaderState shaderState;
 	std::unique_ptr<ShaderResource> shader;
+	
+	// Audio
+	AudioRecorder audioRecorder;
+	std::vector<AudioDevice> audioDevices;
+	std::vector<const char*> audioDevicesNames;
+	int selectedAudioDevice = 0;
 
+	// Data
 	std::vector<float> audioSumQueue;
 };

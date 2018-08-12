@@ -39,12 +39,17 @@ const AudioSample* AudioRecorder::GetSample() const
 
 bool AudioRecorder::Listen(const AudioDevice& device)
 {
+	// It is probably the same audio device.
+	if (this->device.index == device.index) {
+		return true;
+	}
+
 	if (this->device.index != -1) {
 		destroy_thread();
-		BASS_RecordFree();
 	}
 
 	if (!BASS_RecordInit(device.index)) {
+		// TODO: Handle initialize failure
 		return false;
 	}
 
