@@ -128,7 +128,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/tutorial6.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_scene.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
@@ -145,11 +145,14 @@ void App::draw(float elapsedtime)
 
 	if (auto sample = audioRecorder.GetSample()) {
 		shaderState.iAudioSum = sample->sum;
-		shaderState.iAudioAverage = sample->average;
+
+		// TODO: Make audio time a curve!
+		audioLastTimeDelta = shaderState.iAudioTime;
+		shaderState.iAudioTime += sample->sum / 100;
+		audioTimeDelta = shaderState.iAudioTime - audioLastTimeDelta;
 	}
 	else {
 		shaderState.iAudioSum = 0;
-		shaderState.iAudioAverage = 0;
 	}
 
 	audioSumQueue.insert(audioSumQueue.begin(), shaderState.iAudioSum);
@@ -186,9 +189,10 @@ void App::drawDebug()
 	{
 		ImGui::Text("%.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		ImGui::PlotLines("", &audioSumQueue[0], audioSumQueue.size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
-		ImGui::BeginChild("AudioInfo", ImVec2(0, 10));
+		ImGui::BeginChild("AudioInfo", ImVec2(0, 50));
 		{
-
+			ImGui::Text("Audio: %f", shaderState.iAudioSum);
+			ImGui::Text("Audio Time: %f", audioTimeDelta);
 		}
 		ImGui::EndChild();
 

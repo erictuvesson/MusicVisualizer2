@@ -54,6 +54,9 @@
     <None Include="shaders\func\raymarching.glsl">
       <Filter>shaders\func</Filter>
     </None>
+    <None Include="shaders\func\helpers_2d.glsl">
+      <Filter>shaders\func</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp">

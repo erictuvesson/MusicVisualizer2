@@ -15,7 +15,7 @@ struct ShaderState
 	float iChannelResolution[3][4];
 	
 	float iAudioSum;
-	float iAudioAverage;
+	float iAudioTime;
 };
 
 /**
@@ -42,5 +42,5 @@ private:
 	GLuint iSampleRateLocation;
 	GLuint iChannelResolutionLocation;
 	GLuint iAudioSumLocation;
-	GLuint iAudioAverageLocation;
+	GLuint iAudioTimeLocation;
 };

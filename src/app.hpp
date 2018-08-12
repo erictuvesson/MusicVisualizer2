@@ -44,6 +44,7 @@ private:
 	std::vector<AudioDevice> audioDevices;
 	std::vector<const char*> audioDevicesNames;
 	int selectedAudioDevice = 0;
+	float audioLastTimeDelta, audioTimeDelta = 0;
 
 	// Data
 	std::vector<float> audioSumQueue;
