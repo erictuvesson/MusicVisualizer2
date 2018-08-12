@@ -12,7 +12,7 @@ struct ShaderSetup
 /**
  * ShaderFactory, load and complies all shaders used.
  */
-static class ShaderFactory
+class ShaderFactory
 {
 public:
 	static std::unique_ptr<ShaderResource> CompileShader(ShaderSetup shaderSetup);

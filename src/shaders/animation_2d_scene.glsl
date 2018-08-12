@@ -40,7 +40,7 @@ void main(void)
 	
 	vec3 color = vec3(0);
 	color = vec3(smoothstep(0.005, 0.0, df) * 0.5 + 0.25);
-	// color /= iAudioSum;
+	color /= iAudioSum;
 
 	gl_FragColor = vec4(color, 1.0);
 }

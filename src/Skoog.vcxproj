@@ -169,7 +169,7 @@
     <None Include="shaders\tutorial3.frag" />
     <None Include="shaders\tutorial4.glsl" />
     <None Include="shaders\tutorial5.frag" />
-    <None Include="shaders\tutorial6.glsl" />
+    <None Include="shaders\animation_2d_scene.glsl" />
     <None Include="shaders\tutorial7.frag" />
     <None Include="shaders\tutorial8.glsl" />
   </ItemGroup>
@@ -179,6 +179,7 @@
     <ClInclude Include="file_manager.hpp" />
     <ClInclude Include="fullscreen_quad.hpp" />
     <ClInclude Include="audio_recorder.hpp" />
+    <ClInclude Include="graph.hpp" />
     <ClInclude Include="image.hpp" />
     <ClInclude Include="image_factory.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="file_manager.cpp" />
     <ClCompile Include="fullscreen_quad.cpp" />
+    <ClCompile Include="graph.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="image_factory.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />

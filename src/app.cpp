@@ -8,6 +8,8 @@
 App::App()
 	: window(nullptr)
 	, glContext(nullptr)
+	, audioSumQueue(new Graph())
+	, audioTimeDeltaQueue(new Graph())
 {
 
 }
@@ -28,9 +30,9 @@ int App::Run()
 	{
 		int wx, wy;
 		SDL_GetWindowSize(window, &wx, &wy);
-		shaderState.iResolution[0] = wx;
-		shaderState.iResolution[1] = wy;
-		shaderState.iResolution[2] = 0;
+		shaderState.iResolution[0] = (float)wx;
+		shaderState.iResolution[1] = (float)wy;
+		shaderState.iResolution[2] = 0.0f;
 
 	}
 
@@ -54,9 +56,10 @@ int App::Run()
 		ImGui::NewFrame();
 
 		lastTime = currentTime;
-		currentTime = SDL_GetPerformanceCounter();
+		currentTime = (unsigned int)SDL_GetPerformanceCounter();
 
-		const float deltaTime = (currentTime - lastTime) * 1000 / SDL_GetPerformanceFrequency();
+		const float deltaTime = (float)(
+			(currentTime - lastTime) * 1000 / (unsigned int)SDL_GetPerformanceFrequency());
 
 		draw(deltaTime / 1000);
 	}
@@ -155,10 +158,8 @@ void App::draw(float elapsedtime)
 		shaderState.iAudioSum = 0;
 	}
 
-	audioSumQueue.insert(audioSumQueue.begin(), shaderState.iAudioSum);
-	while (audioSumQueue.size() > 300) {
-		audioSumQueue.pop_back();
-	}
+	audioSumQueue->Push(shaderState.iAudioSum);
+	audioTimeDeltaQueue->Push(audioTimeDelta);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -188,7 +189,8 @@ void App::drawDebug()
 	if (ImGui::Begin("", NULL, (corner != -1 ? ImGuiWindowFlags_NoMove : 0) | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
 	{
 		ImGui::Text("%.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::PlotLines("", &audioSumQueue[0], audioSumQueue.size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
+		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
+		ImGui::PlotLines("", audioTimeDeltaQueue->Data(), audioTimeDeltaQueue->Size(), 0, NULL, 0, 0.1f, ImVec2(0, 100), 4);
 		ImGui::BeginChild("AudioInfo", ImVec2(0, 50));
 		{
 			ImGui::Text("Audio: %f", shaderState.iAudioSum);
@@ -200,7 +202,7 @@ void App::drawDebug()
 
 		ImGui::BeginChild("Settings", ImVec2(0, 50));
 		{
-			if (ImGui::Combo("Device", &selectedAudioDevice, audioDevicesNames.data(), audioDevicesNames.size())) {
+			if (ImGui::Combo("Device", &selectedAudioDevice, audioDevicesNames.data(), (int)audioDevicesNames.size())) {
 				setAudioDevice();
 			}
 		}

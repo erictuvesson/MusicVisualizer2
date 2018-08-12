@@ -8,6 +8,7 @@
 #include "fullscreen_quad.hpp"
 #include "shader_factory.hpp"
 #include "shader_resource.hpp"
+#include "graph.hpp"
 
 /**
  * App, the music visualizer!
@@ -47,5 +48,6 @@ private:
 	float audioLastTimeDelta, audioTimeDelta = 0;
 
 	// Data
-	std::vector<float> audioSumQueue;
+	std::unique_ptr<Graph> audioSumQueue;
+	std::unique_ptr<Graph> audioTimeDeltaQueue;
 };

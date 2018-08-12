@@ -33,9 +33,6 @@
     <None Include="shaders\tutorial5.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\tutorial6.glsl">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\tutorial7.frag">
       <Filter>shaders</Filter>
     </None>
@@ -56,6 +53,9 @@
     </None>
     <None Include="shaders\func\helpers_2d.glsl">
       <Filter>shaders\func</Filter>
+    </None>
+    <None Include="shaders\animation_2d_scene.glsl">
+      <Filter>shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +116,9 @@
     <ClInclude Include="shader_parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graph.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -161,6 +164,9 @@
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="shader_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
