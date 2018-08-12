@@ -45,6 +45,12 @@
     <None Include="shaders\func\shape_2d.glsl">
       <Filter>shaders\func</Filter>
     </None>
+    <None Include="shaders\tutorial8.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\func\shape_3d.glsl">
+      <Filter>shaders\func</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp">

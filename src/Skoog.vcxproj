@@ -162,12 +162,14 @@
     <None Include="packages.config" />
     <None Include="shaders\func\animation.glsl" />
     <None Include="shaders\func\shape_2d.glsl" />
+    <None Include="shaders\func\shape_3d.glsl" />
     <None Include="shaders\tutorial2.glsl" />
     <None Include="shaders\tutorial3.frag" />
     <None Include="shaders\tutorial4.glsl" />
     <None Include="shaders\tutorial5.frag" />
     <None Include="shaders\tutorial6.glsl" />
     <None Include="shaders\tutorial7.frag" />
+    <None Include="shaders\tutorial8.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />

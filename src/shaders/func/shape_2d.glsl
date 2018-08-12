@@ -10,11 +10,11 @@ const vec2 hex0 = polar((1.0 * pi) / 6.0);
 const vec2 hex1 = polar((3.0 * pi) / 6.0);
 const vec2 hex2 = polar((5.0 * pi) / 6.0);
 
-float hexagon(vec2 uv, float r) {
+float shape2d_hexagon(vec2 uv, float r) {
   return max(max(abs(dot(uv, hex0)), abs(dot(uv, hex1))), abs(dot(uv, hex2))) - r;
 }
 
-float circle(vec2 uv, float r) {
+float shape2d_circle(vec2 uv, float r) {
   return length(uv) - r;
 }
 
