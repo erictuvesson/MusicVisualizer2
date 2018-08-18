@@ -9,6 +9,7 @@
 #include "shader_factory.hpp"
 #include "shader_resource.hpp"
 #include "graph.hpp"
+#include "curve.hpp"
 
 /**
  * App, the music visualizer!
@@ -45,9 +46,11 @@ private:
 	std::vector<AudioDevice> audioDevices;
 	std::vector<const char*> audioDevicesNames;
 	int selectedAudioDevice = 0;
-	float audioLastTimeDelta, audioTimeDelta = 0;
+	float audioTime = 0, audioLastTime = 0, audioTimeDelta = 0;
+	float lastAudioSum = 0;
 
 	// Data
 	std::unique_ptr<Graph> audioSumQueue;
 	std::unique_ptr<Graph> audioTimeDeltaQueue;
+	std::unique_ptr<Curve> curve;
 };

@@ -8,8 +8,9 @@
 App::App()
 	: window(nullptr)
 	, glContext(nullptr)
-	, audioSumQueue(new Graph())
-	, audioTimeDeltaQueue(new Graph())
+	, audioSumQueue(new Graph(200))
+	, audioTimeDeltaQueue(new Graph(200))
+	, curve(new Curve())
 {
 
 }
@@ -149,10 +150,18 @@ void App::draw(float elapsedtime)
 	if (auto sample = audioRecorder.GetSample()) {
 		shaderState.iAudioSum = sample->sum;
 
-		// TODO: Make audio time a curve!
-		audioLastTimeDelta = shaderState.iAudioTime;
-		shaderState.iAudioTime += sample->sum / 100;
-		audioTimeDelta = shaderState.iAudioTime - audioLastTimeDelta;
+		audioLastTime = audioTime;
+		audioTime += sample->sum;
+		audioTimeDelta = audioTime - audioLastTime;
+
+		if (lastAudioSum < sample->sum) {
+			audioTimeDelta *= 0.5f;
+			std::cout << audioTimeDelta << '\n';
+		}
+
+		lastAudioSum = sample->sum;
+
+		shaderState.iAudioTime += curve->At(audioTimeDelta);
 	}
 	else {
 		shaderState.iAudioSum = 0;
@@ -162,7 +171,6 @@ void App::draw(float elapsedtime)
 	audioTimeDeltaQueue->Push(audioTimeDelta);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 	shader->Apply(shaderState);
 	fullscreenQuad.Draw();

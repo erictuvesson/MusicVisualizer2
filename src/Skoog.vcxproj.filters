@@ -119,6 +119,9 @@
     <ClInclude Include="graph.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="curve.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
@@ -167,6 +170,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="curve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

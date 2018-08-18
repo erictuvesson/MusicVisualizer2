@@ -176,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="app.hpp" />
     <ClInclude Include="config.hpp" />
+    <ClInclude Include="curve.hpp" />
     <ClInclude Include="file_manager.hpp" />
     <ClInclude Include="fullscreen_quad.hpp" />
     <ClInclude Include="audio_recorder.hpp" />
@@ -197,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="curve.cpp" />
     <ClCompile Include="file_manager.cpp" />
     <ClCompile Include="fullscreen_quad.cpp" />
     <ClCompile Include="graph.cpp" />
