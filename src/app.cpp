@@ -49,6 +49,13 @@ int App::Run()
 			case SDL_QUIT:
 				isRunning = false;
 				break;
+			case SDL_KEYDOWN:
+				if (event.key.keysym.sym == SDLK_SPACE && event.key.repeat == 0) {
+					this->showDebug = !showDebug;
+				}
+				break;
+			case SDL_KEYUP:
+				break;
 			}
 		}
 
@@ -182,7 +189,9 @@ void App::draw(float elapsedtime)
 	shader->Apply(shaderState);
 	fullscreenQuad.Draw();
 
-	drawDebug();
+	if (showDebug) {
+		drawDebug();
+	}
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

@@ -48,10 +48,10 @@
     <None Include="shaders\basic_color_scene.glsl">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\animation_2d_line.glsl">
+    <None Include="shaders\raycasting_scene.glsl">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shaders\raycasting_scene.glsl">
+    <None Include="shaders\animation_2d_line_scene.glsl">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

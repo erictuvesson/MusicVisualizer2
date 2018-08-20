@@ -41,6 +41,9 @@ private:
 	ShaderState shaderState;
 	std::unique_ptr<ShaderResource> shader;
 	
+	// System
+	bool showDebug = true;
+
 	// Audio
 	AudioRecorder audioRecorder;
 	std::vector<AudioDevice> audioDevices;

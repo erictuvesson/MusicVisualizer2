@@ -169,7 +169,7 @@
     <None Include="shaders\basic_color_scene.glsl" />
     <None Include="shaders\raymarching_scene.glsl" />
     <None Include="shaders\animation_2d_scene.glsl" />
-    <None Include="shaders\animation_2d_line.glsl" />
+    <None Include="shaders\animation_2d_line_scene.glsl" />
     <None Include="shaders\raycasting_scene.glsl" />
   </ItemGroup>
   <ItemGroup>
