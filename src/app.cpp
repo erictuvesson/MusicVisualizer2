@@ -128,11 +128,18 @@ int App::initialize()
 	ImGui::StyleColorsDark();
 
 	// Initialize the audio device
+	//updateAudioDevices();
+	//for (int i = 0; i < audioDevices.size(); i++) {
+	//	std::cout << i << ". " << audioDevices[i].info.name << '\n';
+	//}
+	// 
+	// this->selectedAudioDevice = std::cin.get() - '0';
+
 	setAudioDevice();
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_scene.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_fullscreen_scene.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;

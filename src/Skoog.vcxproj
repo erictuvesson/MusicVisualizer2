@@ -165,13 +165,12 @@
     <None Include="shaders\func\raymarching.glsl" />
     <None Include="shaders\func\shape_2d.glsl" />
     <None Include="shaders\func\shape_3d.glsl" />
-    <None Include="shaders\tutorial2.glsl" />
-    <None Include="shaders\tutorial3.frag" />
-    <None Include="shaders\tutorial4.glsl" />
-    <None Include="shaders\tutorial5.frag" />
+    <None Include="shaders\animation_2d_fullscreen_scene.glsl" />
+    <None Include="shaders\basic_color_scene.glsl" />
+    <None Include="shaders\raymarching_scene.glsl" />
     <None Include="shaders\animation_2d_scene.glsl" />
-    <None Include="shaders\tutorial7.frag" />
-    <None Include="shaders\tutorial8.glsl" />
+    <None Include="shaders\animation_2d_line.glsl" />
+    <None Include="shaders\raycasting_scene.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />

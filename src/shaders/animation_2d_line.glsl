@@ -20,7 +20,7 @@ void main(void)
 	{
 		float i01 = i / it;
 		float rnd = 1; // texture( iChannel0, vec2(i01)).x;
-		float react = iAudioAverage * 100; // SOUND_MULTIPLIER * texture( iChannel1, vec2(i01, 0.0) ).x;    
+		float react = iAudioSum * 100; // SOUND_MULTIPLIER * texture( iChannel1, vec2(i01, 0.0) ).x;    
 		
 		float c1 = (uv.x + 1.1 + react) * 0.004 * abs( 1.0 / sin( (uv.y +0.25) +
 														 sin(uv.x * 4.0 * rnd + rnd * 7.0 + iTime * 0.75) *

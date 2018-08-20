@@ -21,29 +21,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="shaders\tutorial2.glsl">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\tutorial3.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\tutorial4.glsl">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\tutorial5.frag">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\tutorial7.frag">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\func\animation.glsl">
       <Filter>shaders\func</Filter>
     </None>
     <None Include="shaders\func\shape_2d.glsl">
       <Filter>shaders\func</Filter>
-    </None>
-    <None Include="shaders\tutorial8.glsl">
-      <Filter>shaders</Filter>
     </None>
     <None Include="shaders\func\shape_3d.glsl">
       <Filter>shaders\func</Filter>
@@ -55,6 +37,21 @@
       <Filter>shaders\func</Filter>
     </None>
     <None Include="shaders\animation_2d_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\animation_2d_fullscreen_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\raymarching_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\basic_color_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\animation_2d_line.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\raycasting_scene.glsl">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
