@@ -5,10 +5,7 @@
 void main(void) {
 	vec2 center = screen_center() * 2;
 	
-	float time = iTime; 
-	time = mod(time, 3.0);
-
-	center *= rotate(anim_linear(0.0, 3.0, time) * pi * 2.0)
+	center *= rotate(anim_linear(0.0, 2.0, mod(iTime, 2.0)) * pi * 2.0)
 
 	vec3 backgroundColor = vec3(0, 0, 0);
 	vec3 heart = shape2d_heart1(center);
