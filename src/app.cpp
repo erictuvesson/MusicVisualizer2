@@ -53,6 +53,11 @@ int App::Run()
 				if (event.key.keysym.sym == SDLK_SPACE && event.key.repeat == 0) {
 					this->showDebug = !showDebug;
 				}
+				if (event.key.keysym.sym == SDLK_F11 && event.key.repeat == 0) {
+					Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
+					bool IsFullscreen = SDL_GetWindowFlags(window) & FullscreenFlag; 
+					SDL_SetWindowFullscreen(window, IsFullscreen ? 0 : FullscreenFlag);
+				}
 				break;
 			case SDL_KEYUP:
 				break;
@@ -146,7 +151,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_fullscreen_v2_scene.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_heart_scene.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
@@ -169,7 +174,7 @@ void App::draw(float elapsedtime)
 		audioTimeDelta = audioTime - audioLastTime;
 
 		if (lastAudioSum < sample->sum) {
-			audioTimeDelta *= 0.5f;
+			audioTimeDelta *= 0.25f;
 			std::cout << audioTimeDelta << '\n';
 		}
 

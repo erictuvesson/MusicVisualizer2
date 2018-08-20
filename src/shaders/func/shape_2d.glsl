@@ -1,8 +1,11 @@
 
 //--- 2D Shapes ---
 
-#define PI 3.14159265359
-#define TAU 6.28318530718
+#define PI			3.14159265359
+#define PI2			(PI * 2)
+#define PIOver2		(PI / 2)
+#define PIOver4		(PI / 4)
+#define TAU			6.28318530718
 
 #define polar(a) vec2(cos(a),sin(a))
 #define rotate(a) mat2(cos(a),sin(a),-sin(a),cos(a));
