@@ -54,6 +54,9 @@
     <None Include="shaders\animation_2d_line_scene.glsl">
       <Filter>shaders</Filter>
     </None>
+    <None Include="shaders\animation_2d_fullscreen_v2_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp">

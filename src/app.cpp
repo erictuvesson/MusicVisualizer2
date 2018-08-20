@@ -146,7 +146,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_fullscreen_scene.glsl" });
+	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_fullscreen_v2_scene.glsl" });
 	if (shader == nullptr) {
 		std::cin.get();
 		return EXIT_FAILURE;
