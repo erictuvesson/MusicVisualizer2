@@ -1,4 +1,4 @@
-# Skoog
+# Music Visualizer
 
 > https://www.shadertoy.com/view/MtBGRt
 > https://www.shadertoy.com/view/ltl3DB

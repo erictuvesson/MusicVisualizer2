@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{184435FB-F1D1-4425-8F8A-93A86E646A3E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Skoog</RootNamespace>
+    <RootNamespace>MusicVisualizer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
