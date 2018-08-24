@@ -33,7 +33,7 @@ private:
 	void setAudioDevice();
 	void updateAudioDevices();
 
-	bool setScene(const std::string scenePath);
+	bool setScene();
 
 private:
 	// Graphics

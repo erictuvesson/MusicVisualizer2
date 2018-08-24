@@ -145,7 +145,6 @@ int App::initialize()
 	ImGui_ImplSDL2_InitForOpenGL(window, glContext);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	// Setup style
 	ImGui::Initialize();
 
 	// Initialize the audio device
@@ -160,7 +159,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	if (!setScene(scenes[1])) {
+	if (!setScene()) {
 		std::cin.get();
 		return EXIT_FAILURE;
 	}
@@ -222,6 +221,10 @@ void App::drawDebug()
 		ImGui::Text("Audio Input");
 		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
 
+		ImGui::Text("Max: %.3f", audioSumQueue->Max());
+		ImGui::Text("Sum: %.3f", audioSumQueue->Sum());
+		ImGui::Text("Average: %.3f", audioSumQueue->Average());
+
 		if (ImGui::CollapsingHeader("Audio Time")) {
 			ImGui::Text("Audio high");
 			ImGui::PlotLines("", audioTimeHQueue->Data(), audioTimeHQueue->Size(), 0, NULL, 0, 0.05f, ImVec2(0, 50), 4);
@@ -238,7 +241,7 @@ void App::drawDebug()
 	if (ImGui::BeginSimple("settings", NULL, 1))
 	{
 		if (ImGui::Combo("Scene", &selectedScene, scenes.data(), (int)scenes.size())) {
-			setScene(scenes[selectedScene]);
+			setScene();
 		}
 
 		if (ImGui::Combo("Device", &selectedAudioDevice, audioDevicesNames.data(), (int)audioDevicesNames.size())) {
@@ -269,13 +272,20 @@ void App::updateAudioDevices()
 	}
 }
 
-bool App::setScene(const std::string scenePath)
+bool App::setScene()
 {
-	auto tmp = ShaderFactory::CompileShader({ "shaders/" + scenePath });
-	if (tmp == nullptr) {
+	try {
+		auto tmp = ShaderFactory::CompileShader({ "shaders/" + std::string(scenes[selectedScene]) });
+		if (tmp == nullptr) {
+			return false;
+		}
+
+		this->shader = std::move(tmp);
+	}
+	catch (const std::exception& e) {
+		std::cout << "-- Switch scene failed" << '\n';
+		std::cout << "Exception: " << e.what() << '\n';
 		return false;
 	}
-
-	this->shader = std::move(tmp);
 	return true;
 }
