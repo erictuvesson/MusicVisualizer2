@@ -1,4 +1,5 @@
 #include "app.hpp"
+#include "ImGuiHelper.hpp"
 
 #include <iostream>
 
@@ -14,7 +15,13 @@ App::App()
 	, audioTimeLQueue(new Graph(200))
 	, curve(new Curve())
 {
-
+	scenes.push_back("animation_2d_fullscreen_scene.glsl");
+	scenes.push_back("animation_2d_heart_scene.glsl");
+	scenes.push_back("animation_2d_line_scene.glsl");
+	scenes.push_back("animation_2d_scene.glsl");
+	scenes.push_back("basic_color_scene.glsl");
+	scenes.push_back("raycasting_scene.glsl");
+	scenes.push_back("raymarching_scene.glsl");
 }
 
 App::~App()
@@ -139,7 +146,7 @@ int App::initialize()
 	ImGui_ImplOpenGL3_Init("#version 330");
 
 	// Setup style
-	ImGui::StyleColorsDark();
+	ImGui::Initialize();
 
 	// Initialize the audio device
 	//updateAudioDevices();
@@ -153,8 +160,7 @@ int App::initialize()
 
 	fullscreenQuad.Initialize();
 
-	shader = ShaderFactory::CompileShader({ "shaders/animation_2d_heart_scene.glsl" });
-	if (shader == nullptr) {
+	if (!setScene(scenes[1])) {
 		std::cin.get();
 		return EXIT_FAILURE;
 	}
@@ -178,16 +184,18 @@ void App::draw(float elapsedtime)
 		const float audioH = curve->At(audioTime - audioLastTime, 0.5f) * 0.025f;
 		audioTimeHQueue->Push(audioH);
 
-		const float audioL = curve->At(sample->sum, 0.1f) * 0.0025f;
+		//const float audioL = curve->At(sample->sum, 0.1f) * 0.0025f;
+		const float audioL = sample->sum > 0.01f ? 0.004f : 0.0f;
 		audioTimeLQueue->Push(audioL);
 
-		shaderState.iAudioTime += (audioH + (audioL - audioH) * 0.75f);
+		const float audioTime = (audioH + (audioL - audioH) * audioLHMix) * audioIntensity;
+		shaderState.iAudioTime += audioTime;
+		audioTimeQueue->Push(audioTime);
 	} else {
 		shaderState.iAudioSum = 0;
 	}
 
 	audioSumQueue->Push(shaderState.iAudioSum);
-	audioTimeQueue->Push(curve->Current());
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -206,32 +214,41 @@ void App::draw(float elapsedtime)
 
 void App::drawDebug()
 {
-	const float DISTANCE = 10.0f;
-	static int corner = 0;
-	ImVec2 window_pos = ImVec2((corner & 1) ? ImGui::GetIO().DisplaySize.x - DISTANCE : DISTANCE, (corner & 2) ? ImGui::GetIO().DisplaySize.y - DISTANCE : DISTANCE);
-	ImVec2 window_pos_pivot = ImVec2((corner & 1) ? 1.0f : 0.0f, (corner & 2) ? 1.0f : 0.0f);
-
-	if (corner != -1)
-		ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
-
-	ImGui::SetNextWindowBgAlpha(1.0f);
-	if (ImGui::Begin("", NULL, (corner != -1 ? ImGuiWindowFlags_NoMove : 0) | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
+	if (ImGui::BeginSimple("info"))
 	{
-		ImGui::Text("%.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Text("Frame Time: %.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::Separator();
+
+		ImGui::Text("Audio Input");
 		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
-		ImGui::PlotLines("", audioTimeQueue->Data(), audioTimeQueue->Size(), 0, NULL, 0, 0.5f, ImVec2(0, 50), 4);
-		ImGui::PlotLines("", audioTimeHQueue->Data(), audioTimeHQueue->Size(), 0, NULL, 0, 0.5f, ImVec2(0, 50), 4);
-		ImGui::PlotLines("", audioTimeLQueue->Data(), audioTimeLQueue->Size(), 0, NULL, 0, 1.0f, ImVec2(0, 50), 4);
+
+		if (ImGui::CollapsingHeader("Audio Time")) {
+			ImGui::Text("Audio high");
+			ImGui::PlotLines("", audioTimeHQueue->Data(), audioTimeHQueue->Size(), 0, NULL, 0, 0.05f, ImVec2(0, 50), 4);
+
+			ImGui::Text("Audio low");
+			ImGui::PlotLines("", audioTimeLQueue->Data(), audioTimeLQueue->Size(), 0, NULL, 0, 0.01f, ImVec2(0, 50), 4);
+
+			ImGui::Text("Audio Final");
+			ImGui::PlotLines("", audioTimeQueue->Data(), audioTimeQueue->Size(), 0, NULL, 0, 0.05f, ImVec2(0, 50), 4);
+		}
+	}
+	ImGui::End();
+
+	if (ImGui::BeginSimple("settings", NULL, 1))
+	{
+		if (ImGui::Combo("Scene", &selectedScene, scenes.data(), (int)scenes.size())) {
+			setScene(scenes[selectedScene]);
+		}
+
+		if (ImGui::Combo("Device", &selectedAudioDevice, audioDevicesNames.data(), (int)audioDevicesNames.size())) {
+			setAudioDevice();
+		}
 
 		ImGui::Separator();
 
-		ImGui::BeginChild("Settings", ImVec2(0, 50));
-		{
-			if (ImGui::Combo("Device", &selectedAudioDevice, audioDevicesNames.data(), (int)audioDevicesNames.size())) {
-				setAudioDevice();
-			}
-		}
-		ImGui::EndChild();
+		ImGui::SliderFloat("Intensity", &audioIntensity, 0.0f, 10.0f);
+		ImGui::SliderFloat("Mix L/H", &audioLHMix, 0.0f, 1.0f);
 	}
 	ImGui::End();
 }
@@ -250,4 +267,15 @@ void App::updateAudioDevices()
 	for (auto device : audioDevices) {
 		audioDevicesNames.push_back(device.info.name);
 	}
+}
+
+bool App::setScene(const std::string scenePath)
+{
+	auto tmp = ShaderFactory::CompileShader({ "shaders/" + scenePath });
+	if (tmp == nullptr) {
+		return false;
+	}
+
+	this->shader = std::move(tmp);
+	return true;
 }

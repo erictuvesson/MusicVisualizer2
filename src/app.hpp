@@ -33,6 +33,8 @@ private:
 	void setAudioDevice();
 	void updateAudioDevices();
 
+	bool setScene(const std::string scenePath);
+
 private:
 	// Graphics
 	SDL_Window* window;
@@ -40,9 +42,13 @@ private:
 	FullscreenQuad fullscreenQuad;
 	ShaderState shaderState;
 	std::unique_ptr<ShaderResource> shader;
-	
+
 	// System
+	std::vector<const char*> scenes;
+	int selectedScene = 1;
 	bool showDebug = true;
+	float audioIntensity = 1.0f;
+	float audioLHMix = 0.5f;
 
 	// Audio
 	AudioRecorder audioRecorder;

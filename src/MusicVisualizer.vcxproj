@@ -183,6 +183,7 @@
     <ClInclude Include="graph.hpp" />
     <ClInclude Include="image.hpp" />
     <ClInclude Include="image_factory.hpp" />
+    <ClInclude Include="ImGuiHelper.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />

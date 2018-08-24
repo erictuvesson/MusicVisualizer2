@@ -122,6 +122,9 @@
     <ClInclude Include="curve.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiHelper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp">
