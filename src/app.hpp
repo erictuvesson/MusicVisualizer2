@@ -54,6 +54,6 @@ private:
 
 	// Data
 	std::unique_ptr<Graph> audioSumQueue;
-	std::unique_ptr<Graph> audioTimeDeltaQueue;
+	std::unique_ptr<Graph> audioTimeQueue, audioTimeHQueue, audioTimeLQueue;
 	std::unique_ptr<Curve> curve;
 };

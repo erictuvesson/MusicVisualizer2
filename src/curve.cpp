@@ -1,18 +1,21 @@
 #include "curve.hpp"
 
-Curve::Curve()
+Curve::Curve(float min, float max)
+	: min(min)
+	, max(max)
 {
 
 }
 
-float Curve::At(float value)
+float Curve::At(float value, float speed)
 {
-	if (value < 0) {
-		return 0;
+	if (value < min) {
+		return min;
 	}
-	else if (value > 0.025f) {
-		return 0.025f;
+	else if (value > max) {
+		return max;
 	}
 
-	return (value * value) / 2;
+	const float target = (value * value) / 8;
+	return current = (current + (target - current) * speed);
 }

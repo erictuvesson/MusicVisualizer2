@@ -9,7 +9,9 @@ App::App()
 	: window(nullptr)
 	, glContext(nullptr)
 	, audioSumQueue(new Graph(200))
-	, audioTimeDeltaQueue(new Graph(200))
+	, audioTimeQueue(new Graph(200))
+	, audioTimeHQueue(new Graph(200))
+	, audioTimeLQueue(new Graph(200))
 	, curve(new Curve())
 {
 
@@ -171,23 +173,21 @@ void App::draw(float elapsedtime)
 
 		audioLastTime = audioTime;
 		audioTime += sample->sum;
-		audioTimeDelta = audioTime - audioLastTime;
-
-		if (lastAudioSum < sample->sum) {
-			audioTimeDelta *= 0.25f;
-			std::cout << audioTimeDelta << '\n';
-		}
-
 		lastAudioSum = sample->sum;
 
-		shaderState.iAudioTime += curve->At(audioTimeDelta);
-	}
-	else {
+		const float audioH = curve->At(audioTime - audioLastTime, 0.5f) * 0.025f;
+		audioTimeHQueue->Push(audioH);
+
+		const float audioL = curve->At(sample->sum, 0.1f) * 0.0025f;
+		audioTimeLQueue->Push(audioL);
+
+		shaderState.iAudioTime += (audioH + (audioL - audioH) * 0.75f);
+	} else {
 		shaderState.iAudioSum = 0;
 	}
 
 	audioSumQueue->Push(shaderState.iAudioSum);
-	audioTimeDeltaQueue->Push(audioTimeDelta);
+	audioTimeQueue->Push(curve->Current());
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -219,13 +219,9 @@ void App::drawDebug()
 	{
 		ImGui::Text("%.3f ms (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
-		ImGui::PlotLines("", audioTimeDeltaQueue->Data(), audioTimeDeltaQueue->Size(), 0, NULL, 0, 0.1f, ImVec2(0, 100), 4);
-		ImGui::BeginChild("AudioInfo", ImVec2(0, 50));
-		{
-			ImGui::Text("Audio: %f", shaderState.iAudioSum);
-			ImGui::Text("Audio Time: %f", audioTimeDelta);
-		}
-		ImGui::EndChild();
+		ImGui::PlotLines("", audioTimeQueue->Data(), audioTimeQueue->Size(), 0, NULL, 0, 0.5f, ImVec2(0, 50), 4);
+		ImGui::PlotLines("", audioTimeHQueue->Data(), audioTimeHQueue->Size(), 0, NULL, 0, 0.5f, ImVec2(0, 50), 4);
+		ImGui::PlotLines("", audioTimeLQueue->Data(), audioTimeLQueue->Size(), 0, NULL, 0, 1.0f, ImVec2(0, 50), 4);
 
 		ImGui::Separator();
 
