@@ -3,7 +3,15 @@
 #include "imgui/imgui.h"
 
 namespace ImGui {
-	inline void Initialize() {
+	inline void Initialize(SDL_Window* window, SDL_GLContext glContext) {
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+
+		ImGui_ImplSDL2_InitForOpenGL(window, glContext);
+		ImGui_ImplOpenGL3_Init("#version 330");
+
 		ImGui::GetStyle().WindowRounding = 0.0f;
 		ImGui::StyleColorsDark();
 	}

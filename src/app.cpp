@@ -15,10 +15,10 @@ App::App()
 	, audioTimeLQueue(new Graph(200))
 	, curve(new Curve())
 {
-	scenes.push_back("animation_2d_fullscreen_scene.glsl");
+	scenes.push_back("animation_2d_polygon_scene.glsl");
 	scenes.push_back("animation_2d_heart_scene.glsl");
 	scenes.push_back("animation_2d_line_scene.glsl");
-	scenes.push_back("animation_2d_scene.glsl");
+	scenes.push_back("animation_2d_animation_scene.glsl");
 	scenes.push_back("basic_color_scene.glsl");
 	scenes.push_back("raycasting_scene.glsl");
 	scenes.push_back("raymarching_scene.glsl");
@@ -136,16 +136,8 @@ int App::initialize()
 		return EXIT_FAILURE;
 	}
 
-	// Setup Dear ImGui binding
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
-
-	ImGui_ImplSDL2_InitForOpenGL(window, glContext);
-	ImGui_ImplOpenGL3_Init("#version 330");
-
-	ImGui::Initialize();
+	// Setup ImGui binding
+	ImGui::Initialize(window, glContext);
 
 	// Initialize the audio device
 	//updateAudioDevices();
@@ -174,6 +166,10 @@ void App::draw(float elapsedtime)
 	shaderState.iFrame++;
 
 	if (auto sample = audioRecorder.GetSample()) {
+		for (int i = 0; i < 256; i++) {
+			shaderState.iSample[i] = sample->fft[i];
+		}
+
 		shaderState.iAudioSum = sample->sum;
 
 		audioLastTime = audioTime;
@@ -219,11 +215,12 @@ void App::drawDebug()
 		ImGui::Separator();
 
 		ImGui::Text("Audio Input");
-		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 3, ImVec2(0, 100), 4);
+		ImGui::PlotLines("", audioSumQueue->Data(), audioSumQueue->Size(), 0, NULL, 0, 5, ImVec2(0, 100), 4);
+		ImGui::Text("Max: %.2f, Average: %.2f", audioSumQueue->Max(), audioSumQueue->Average());
+		ImGui::Separator();
 
-		ImGui::Text("Max: %.3f", audioSumQueue->Max());
-		ImGui::Text("Sum: %.3f", audioSumQueue->Sum());
-		ImGui::Text("Average: %.3f", audioSumQueue->Average());
+		ImGui::Text("Audio Input FFT");
+		ImGui::PlotLines("", &shaderState.iSample[0], 256, 0, NULL, 0, 0.5f, ImVec2(0, 100), 4);
 
 		if (ImGui::CollapsingHeader("Audio Time")) {
 			ImGui::Text("Audio high");

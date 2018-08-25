@@ -161,15 +161,16 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="shaders\animation_2d_heart_scene.glsl" />
+    <None Include="shaders\animation_2d_spectrum_scene.glsl" />
     <None Include="shaders\func\animation.glsl" />
     <None Include="shaders\func\helpers_2d.glsl" />
     <None Include="shaders\func\raymarching.glsl" />
     <None Include="shaders\func\shape_2d.glsl" />
     <None Include="shaders\func\shape_3d.glsl" />
-    <None Include="shaders\animation_2d_fullscreen_scene.glsl" />
+    <None Include="shaders\animation_2d_polygon_scene.glsl" />
     <None Include="shaders\basic_color_scene.glsl" />
     <None Include="shaders\raymarching_scene.glsl" />
-    <None Include="shaders\animation_2d_scene.glsl" />
+    <None Include="shaders\animation_2d_animation_scene.glsl" />
     <None Include="shaders\animation_2d_line_scene.glsl" />
     <None Include="shaders\raycasting_scene.glsl" />
   </ItemGroup>

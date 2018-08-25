@@ -19,6 +19,16 @@ ShaderResource::ShaderResource(GLuint programId)
 	iChannelResolutionLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iChannelResolution");
 	iAudioSumLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioSum");
 	iAudioTimeLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioTime");
+	iSampleLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iSample");
+
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1, &sampleTexture);
+
+	glBindTexture(GL_TEXTURE_2D, sampleTexture);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_CLAMP);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 }
 
 ShaderResource::~ShaderResource()
@@ -30,6 +40,11 @@ void ShaderResource::Apply(const ShaderState& state)
 {
 	glUseProgram(shaderprogram);
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, sampleTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 256, 1, 0, GL_RED, GL_FLOAT, state.iSample);
+	
+	glUniform1i(iSampleLocation, 0);
 	glUniform3fv(iResolutionLocation, 1, &state.iResolution[0]);
 	glUniform1f(iTimeLocation, state.iTime);
 	glUniform1f(iTimeDeltaLocation, state.iTimeDelta);

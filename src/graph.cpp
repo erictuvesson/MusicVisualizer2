@@ -10,10 +10,16 @@ Graph::Graph(int maxQueue)
 
 void Graph::Push(float value)
 {
-	queue.insert(queue.begin(), value);
+	/*queue.insert(queue.begin(), value);
 	while (queue.size() > maxQueue) {
 		queue.pop_back();
+	}*/
+
+	queue.push_back(value);
+	if (queue.size() > maxQueue) {
+		queue.erase(queue.begin(), queue.begin() + (queue.size() - maxQueue));
 	}
+
 
 	float min = 0, max = 0, sum = 0;
 	for (auto& n : queue) {

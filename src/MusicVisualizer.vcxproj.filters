@@ -36,12 +36,6 @@
     <None Include="shaders\func\helpers_2d.glsl">
       <Filter>shaders\func</Filter>
     </None>
-    <None Include="shaders\animation_2d_scene.glsl">
-      <Filter>shaders</Filter>
-    </None>
-    <None Include="shaders\animation_2d_fullscreen_scene.glsl">
-      <Filter>shaders</Filter>
-    </None>
     <None Include="shaders\raymarching_scene.glsl">
       <Filter>shaders</Filter>
     </None>
@@ -55,6 +49,15 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\animation_2d_heart_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\animation_2d_polygon_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\animation_2d_animation_scene.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shaders\animation_2d_spectrum_scene.glsl">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>

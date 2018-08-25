@@ -45,7 +45,7 @@ private:
 
 	// System
 	std::vector<const char*> scenes;
-	int selectedScene = 1;
+	int selectedScene = 0;
 	bool showDebug = true;
 	float audioIntensity = 1.0f;
 	float audioLHMix = 0.5f;
