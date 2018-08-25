@@ -17,6 +17,7 @@ ShaderResource::ShaderResource(GLuint programId)
 	iAudioSumLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioSum");
 	iAudioTimeLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iAudioTime");
 	iSampleLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iSample");
+	iThemeColorLocation = glGetProgramResourceLocation(shaderprogram, GL_UNIFORM, "iThemeColor");
 
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &sampleTexture);
@@ -50,5 +51,7 @@ void ShaderResource::Apply(const ShaderState& state)
 	glUniform1f(iSampleRateLocation, state.iSampleRate);
 	glUniform1f(iAudioSumLocation, state.iAudioSum);
 	glUniform1f(iAudioTimeLocation, state.iAudioTime);
+
+	glUniformMatrix4fv(iThemeColorLocation, 1, GL_FALSE, &state.iThemeColor[0][0]);
 }
 

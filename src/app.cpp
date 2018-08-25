@@ -165,7 +165,12 @@ void App::draw(float elapsedtime)
 	shaderState.iTime += elapsedtime;
 	shaderState.iTimeDelta = elapsedtime;
 	shaderState.iFrame++;
-
+/*
+	shaderState.iThemeColor[0][0] = 0.5f;
+	shaderState.iThemeColor[0][1] = 0.0f;
+	shaderState.iThemeColor[0][2] = 0.0f;
+	shaderState.iThemeColor[0][3] = 1.0f;
+*/
 	if (auto sample = audioRecorder.GetSample()) {
 		for (int i = 0; i < 256; i++) {
 			shaderState.iSample[i] = sample->fft[i];
@@ -247,9 +252,14 @@ void App::drawDebug()
 		}
 
 		ImGui::Separator();
-
 		ImGui::SliderFloat("Intensity", &audioIntensity, 0.0f, 10.0f);
 		ImGui::SliderFloat("Mix L/H", &audioLHMix, 0.0f, 1.0f);
+
+		ImGui::Separator();
+		ImGui::ColorEdit4("Color1", &shaderState.iThemeColor[0][0]);
+		ImGui::ColorEdit4("Color2", &shaderState.iThemeColor[1][0]);
+		ImGui::ColorEdit4("Color3", &shaderState.iThemeColor[2][0]);
+		ImGui::ColorEdit4("Color4", &shaderState.iThemeColor[3][0]);
 	}
 	ImGui::End();
 }

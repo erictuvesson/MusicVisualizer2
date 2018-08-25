@@ -163,6 +163,7 @@
     <None Include="shaders\animation_2d_heart_scene.glsl" />
     <None Include="shaders\animation_2d_spectrum_scene.glsl" />
     <None Include="shaders\func\animation.glsl" />
+    <None Include="shaders\func\color.glsl" />
     <None Include="shaders\func\helpers_2d.glsl" />
     <None Include="shaders\func\raymarching.glsl" />
     <None Include="shaders\func\shape_2d.glsl" />

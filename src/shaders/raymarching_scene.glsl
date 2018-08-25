@@ -1,7 +1,4 @@
-// training for modeling shapes
-// using koltes code as base https://www.shadertoy.com/view/XdByD3
-// using iq articles
-// using mercury library
+//! #include "func/color.glsl"
 
 #define PI 3.1415926535897932384626433832795
 #define TAU 6.283185307179586476925286766559
@@ -77,8 +74,9 @@ void main(void)
 	}
 
 	float r = float(i) / float(count);
-	gl_FragColor = vec4(0, 1, 0, 1);
-	gl_FragColor *= smoothstep(.0,10.,length(mp-ro));
+	
+	gl_FragColor = vec4(1.0) - iThemeColor[0];
+	gl_FragColor *= smoothstep(.0,10.,length(mp-ro)) * iThemeColor[1];
 	gl_FragColor *= r;
 	gl_FragColor = 1. - gl_FragColor;
 }
