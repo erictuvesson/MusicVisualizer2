@@ -8,12 +8,9 @@ struct ShaderState
 	float iTime;
 	float iTimeDelta;
 	float iFrame;
-	float iChannelTime[4];
 	float iMouse[4];
-	float iDate[4];
 	float iSampleRate;
 	float iSample[256];
-	float iChannelResolution[3][4];
 
 	float iAudioSum;
 	float iAudioTime;
@@ -39,12 +36,9 @@ private:
 	GLuint iTimeLocation;
 	GLuint iTimeDeltaLocation;
 	GLuint iFrameLocation;
-	GLuint iChannelTimeLocation;
 	GLuint iMouseLocation;
-	GLuint iDateLocation;
 	GLuint iSampleRateLocation;
 	GLuint iSampleLocation;
-	GLuint iChannelResolutionLocation;
 	GLuint iAudioSumLocation;
 	GLuint iAudioTimeLocation;
 };

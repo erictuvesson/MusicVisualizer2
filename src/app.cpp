@@ -15,6 +15,7 @@ App::App()
 	, audioTimeLQueue(new Graph(200))
 	, curve(new Curve())
 {
+	scenes.push_back("animation_2d_spectrum_scene.glsl");
 	scenes.push_back("animation_2d_polygon_scene.glsl");
 	scenes.push_back("animation_2d_heart_scene.glsl");
 	scenes.push_back("animation_2d_line_scene.glsl");
