@@ -137,6 +137,8 @@ int App::initialize()
 		return EXIT_FAILURE;
 	}
 
+	// SDL_GL_SetSwapInterval(0);
+
 	// Setup ImGui binding
 	ImGui::Initialize(window, glContext);
 
@@ -157,6 +159,22 @@ int App::initialize()
 		return EXIT_FAILURE;
 	}
 
+	
+	shaderState.iThemeColor[1][0] = 1.0f;
+	shaderState.iThemeColor[1][1] = 1.0f;
+	shaderState.iThemeColor[1][2] = 1.0f;
+	shaderState.iThemeColor[1][3] = 1.0f;
+
+	shaderState.iThemeColor[2][0] = 1.0f;
+	shaderState.iThemeColor[2][1] = 0.0f;
+	shaderState.iThemeColor[2][2] = 0.0f;
+	shaderState.iThemeColor[2][3] = 1.0f;
+
+	shaderState.iThemeColor[3][0] = 0.0f;
+	shaderState.iThemeColor[3][1] = 0.0f;
+	shaderState.iThemeColor[3][2] = 1.0f;
+	shaderState.iThemeColor[3][3] = 1.0f;
+
 	return EXIT_SUCCESS;
 }
 
@@ -165,12 +183,6 @@ void App::draw(float elapsedtime)
 	shaderState.iTime += elapsedtime;
 	shaderState.iTimeDelta = elapsedtime;
 	shaderState.iFrame++;
-/*
-	shaderState.iThemeColor[0][0] = 0.5f;
-	shaderState.iThemeColor[0][1] = 0.0f;
-	shaderState.iThemeColor[0][2] = 0.0f;
-	shaderState.iThemeColor[0][3] = 1.0f;
-*/
 	if (auto sample = audioRecorder.GetSample()) {
 		for (int i = 0; i < 256; i++) {
 			shaderState.iSample[i] = sample->fft[i];

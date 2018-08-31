@@ -35,5 +35,7 @@ void FullscreenQuad::Initialize()
 
 void FullscreenQuad::Draw()
 {
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }

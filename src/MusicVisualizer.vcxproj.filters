@@ -33,9 +33,6 @@
     <None Include="shaders\func\raymarching.glsl">
       <Filter>shaders\func</Filter>
     </None>
-    <None Include="shaders\func\helpers_2d.glsl">
-      <Filter>shaders\func</Filter>
-    </None>
     <None Include="shaders\raymarching_scene.glsl">
       <Filter>shaders</Filter>
     </None>
@@ -61,6 +58,9 @@
       <Filter>shaders</Filter>
     </None>
     <None Include="shaders\func\color.glsl">
+      <Filter>shaders\func</Filter>
+    </None>
+    <None Include="shaders\func\math_helper.glsl">
       <Filter>shaders\func</Filter>
     </None>
   </ItemGroup>

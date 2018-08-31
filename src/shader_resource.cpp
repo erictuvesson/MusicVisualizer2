@@ -27,6 +27,9 @@ ShaderResource::ShaderResource(GLuint programId)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	GLint swizzleMask[] = { GL_RED, GL_RED, GL_RED, GL_RED };
+	glTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_RGBA, swizzleMask);
 }
 
 ShaderResource::~ShaderResource()
@@ -38,10 +41,15 @@ void ShaderResource::Apply(const ShaderState& state)
 {
 	glUseProgram(shaderprogram);
 
+	GLfloat data[256];
+	for (size_t i = 0; i < 256; i++) {
+		data[i] = 1.0f;
+	}
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, sampleTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 256, 1, 0, GL_RED, GL_FLOAT, state.iSample);
-	
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 256, 1, 0, GL_RED, GL_FLOAT, data);
+
 	glUniform1i(iSampleLocation, 0);
 	glUniform3fv(iResolutionLocation, 1, &state.iResolution[0]);
 	glUniform1f(iTimeLocation, state.iTime);
