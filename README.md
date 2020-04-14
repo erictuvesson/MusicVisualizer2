@@ -1,5 +1,10 @@
 # Music Visualizer
 
+This is the continuation of my other project [erictuvesson/MusicVisualizer](https://github.com/erictuvesson/MusicVisualizer) that was made in C#.
+
+> This project is a technical test which is missing some features.
+> Testing whether I could get it working easier and smoother than the C# version which had some technical limitations.
+
 ## Shader Scene
 
 |Name|Type|Value|Description|
@@ -13,23 +18,3 @@
 |iAudioSum|float|0.0-1.0||
 |iAudioTime|float|0.0-1.0|Custom audio time based on many variables|
 |iSample|float||Audio FFT spectrum|
-
-## Things I want to add
-
-> https://www.shadertoy.com/view/MtBGRt
-> https://www.shadertoy.com/view/ltl3DB
-> https://www.shadertoy.com/view/4sSyDd
-> https://www.shadertoy.com/view/ll2fRW
-> https://www.shadertoy.com/view/MsdBDn
-> https://www.shadertoy.com/view/4lcXD4
-> https://www.shadertoy.com/view/lds3zr
-> https://www.shadertoy.com/view/ll2GD3
-> https://www.shadertoy.com/view/XdlSDs
-> https://www.shadertoy.com/view/4dsGzH
-
-> https://www.shadertoy.com/view/MldXzN
-
-> https://www.shadertoy.com/results?query=tag=2d&sort=popular&from=12&num=12
-
-
-> https://www.shadertoy.com/view/Xds3zN
