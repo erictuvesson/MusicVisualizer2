@@ -62,9 +62,9 @@ private:
 	void process_audio();
 
 private:
+	bool running;
 	AudioDevice device;
 	std::thread thread;
-	std::unique_ptr<bool> running;
 	std::unique_ptr<AudioSample> sample;
 	std::mutex m;
 };

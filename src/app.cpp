@@ -279,6 +279,10 @@ void App::drawDebug()
 void App::setAudioDevice()
 {
 	updateAudioDevices();
+
+	// Happens when there is no recording devices available
+	assert(audioDevices.size() > 0);
+	
 	audioRecorder.Listen(audioDevices[selectedAudioDevice]);
 }
 

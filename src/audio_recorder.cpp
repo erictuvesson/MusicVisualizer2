@@ -8,7 +8,7 @@ static BOOL bassRecordProc(HRECORD handle, const void *buffer, DWORD length, voi
 
 AudioRecorder::AudioRecorder()
 	: device({ -1 })
-	, running(std::make_unique<bool>(true))
+	, running(true)
 {
 
 }
