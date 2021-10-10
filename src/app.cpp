@@ -143,22 +143,35 @@ int App::initialize()
 	ImGui::Initialize(window, glContext);
 
 	// Initialize the audio device
-	//updateAudioDevices();
-	//for (int i = 0; i < audioDevices.size(); i++) {
-	//	std::cout << i << ". " << audioDevices[i].info.name << '\n';
-	//}
-	// 
-	// this->selectedAudioDevice = std::cin.get() - '0';
+	updateAudioDevices();
 
-	setAudioDevice();
+	bool usingDefault = false;
+	int32_t n = 0;
+	for (auto& device : audioDevices)
+	{
+		// if (device.flag_default)
+		if (device.type == AudioDeviceType::HEADPHONES)
+		{
+			usingDefault = true;
+			selectedAudioDevice = n;
+			audioRecorder.Listen(device);
+		}
+		n++;
+	}
 
+	if (!usingDefault)
+	{
+		setAudioDevice();
+	}
+
+	// Initialize the graphics
 	fullscreenQuad.Initialize();
 
-	if (!setScene()) {
+	if (!setScene())
+	{
 		std::cin.get();
 		return EXIT_FAILURE;
 	}
-
 	
 	shaderState.iThemeColor[1][0] = 1.0f;
 	shaderState.iThemeColor[1][1] = 1.0f;
@@ -291,8 +304,9 @@ void App::updateAudioDevices()
 	this->audioDevices = audioRecorder.GetDevices();
 
 	audioDevicesNames.clear();
-	for (auto device : audioDevices) {
-		audioDevicesNames.push_back(device.info.name);
+	for (auto& device : audioDevices)
+	{
+		audioDevicesNames.push_back(device.name);
 	}
 }
 

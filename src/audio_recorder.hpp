@@ -1,10 +1,28 @@
 #pragma once
 
+#define WASAPI true
+
 #include <vector>
 #include <memory>
 #include <thread>
 #include <mutex>
 #include <bass.h>
+#include <basswasapi.h>
+
+enum AudioDeviceType
+{
+	NETWORKDEVICE	= 0,
+	SPEAKERS		= 1,
+	LINELEVEL		= 2,
+	HEADPHONES		= 3,
+	MICROPHONE		= 4,
+	HEADSET			= 5,
+	HANDSET			= 6,
+	DIGITAL			= 7,
+	SPDIF			= 8,
+	HDMI			= 9,
+	UNKNOWN			= 10
+};
 
 /**
  * AudioDevice, a detected audio device that can be captured.
@@ -12,7 +30,14 @@
 struct AudioDevice
 {
 	int32_t index;
-	BASS_DEVICEINFO info;
+
+	const char* name;	// description
+	const char* driver;	// driver
+
+	AudioDeviceType type;
+	bool flag_default;
+	int32_t freq;
+	int32_t channels;
 };
 
 /**
@@ -63,6 +88,7 @@ private:
 
 private:
 	bool running;
+	bool initialized;
 	AudioDevice device;
 	std::thread thread;
 	std::unique_ptr<AudioSample> sample;
